@@ -16,7 +16,7 @@ function AuthPage() {
     setMode((currentMode) =>
       currentMode === 'register' ? 'login' : 'register',
     )
-    
+    setNotice('')
   }
 
   function handleSubmit(event) {

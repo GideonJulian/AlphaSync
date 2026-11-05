@@ -1,70 +1,102 @@
-import { ArrowRight, RadioTower, TrendingUp } from 'lucide-react'
+import { ArrowRight, Check, Compass, RadioTower } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 const audiences = [
   {
     category: 'For Copiers',
-    title: 'Mirror Pro Portfolios',
+    title: 'Follow the traders. Keep control.',
     description:
-      'Follow top-ranked institutional traders and automatically copy their positions with granular trade sizing, automated trailing stops, and independent risk caps.',
-    action: 'Start copying',
-    Icon: TrendingUp,
+      'Find a trading approach that fits you, then decide how it runs in your broker trading account.',
+    action: 'Explore Strategies',
+    Icon: Compass,
+    benefits: [
+      'Discover verified master traders.',
+      'Compare strategies and performance.',
+      'Connect your broker trading account using the required MT5 account details.',
+      'Configure risk and copying preferences.',
+      'Monitor copied positions and performance.',
+    ],
   },
   {
-    category: 'For Signal Providers',
-    title: 'Monetize Your Edge',
+    category: 'For Master Traders',
+    title: 'Turn your trading into an opportunity.',
     description:
-      'Broadcast your MT5 executions to a global audience. Retain full IP protection on your underlying logic while monetizing performance and subscription fees.',
-    action: 'Become a trader',
+      'Share your strategy with a wider community and build a subscriber base around your track record.',
+    action: 'Become a Trader',
     Icon: RadioTower,
+    benefits: [
+      'Share your trading strategies.',
+      'Connect and verify your broker trading account.',
+      'Publish strategies on the marketplace.',
+      'Attract subscribers.',
+      'Earn revenue from paid subscriptions.',
+      'Monitor subscriber activity and performance.',
+    ],
   },
 ]
 
 function UserTypesSection() {
   return (
-    <section id="user-types" className="bg-alpha-white py-16 sm:py-20 lg:py-24">
+    <section
+      id="user-types"
+      className="scroll-mt-20 bg-alpha-white py-16 sm:py-20 lg:py-24"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 max-w-2xl sm:mb-12">
           <span className="text-[11px] font-semibold uppercase tracking-widest text-alpha-navy/70">
-            Flexibility
+            One platform, two ways to grow
           </span>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-alpha-navy">
-            Built for traders and copiers.
+          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-alpha-navy sm:text-4xl">
+            Built for the whole trading community.
           </h2>
-          <p className="mt-2 text-sm text-alpha-navy/70">
-            Two dedicated interfaces engineered for bilateral market
-            participation.
+          <p className="mt-3 text-sm leading-6 text-alpha-navy/70 sm:text-base">
+            Follow strategies as a Copier, or bring your expertise to the
+            marketplace as a Master Trader.
           </p>
         </div>
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          {audiences.map(({ action, category, description, Icon, title }) => (
-            <article
-              key={category}
-              className="flex flex-col justify-between rounded-2xl border border-alpha-border bg-alpha-white p-7 shadow-sm transition-shadow hover:shadow-md sm:p-9"
-            >
-              <div>
-                <div className="mb-6 flex size-12 items-center justify-center rounded-xl bg-alpha-border/50 text-alpha-navy">
-                  <Icon aria-hidden="true" className="size-7" />
+        <div className="grid grid-cols-1 items-stretch gap-5 md:grid-cols-2 md:gap-6">
+          {audiences.map(
+            ({ action, benefits, category, description, Icon, title }) => (
+              <article
+                key={category}
+                className="flex h-full flex-col rounded-2xl border border-alpha-border bg-alpha-white p-6 sm:p-8 lg:p-9"
+              >
+                <div className="mb-6 flex size-12 items-center justify-center rounded-xl border border-alpha-border bg-alpha-border/30 text-alpha-navy">
+                  <Icon aria-hidden="true" className="size-6" />
                 </div>
-                <span className="text-[11px] font-semibold uppercase tracking-wider text-alpha-navy/70">
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-alpha-navy/60">
                   {category}
                 </span>
-                <h3 className="mb-2 mt-1 text-2xl font-semibold text-alpha-navy">
+                <h3 className="mb-3 mt-2 max-w-md text-2xl font-semibold leading-tight tracking-tight text-alpha-navy sm:text-[28px]">
                   {title}
                 </h3>
-                <p className="mb-8 text-sm leading-relaxed text-alpha-navy/70">
+                <p className="mb-6 max-w-lg text-sm leading-relaxed text-alpha-navy/70">
                   {description}
                 </p>
-              </div>
-              <Link
-                to="/auth"
-                className="inline-flex items-center gap-2 text-sm font-semibold text-alpha-navy transition-colors hover:text-alpha-orange focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-alpha-orange"
-              >
-                {action}
-                <ArrowRight aria-hidden="true" className="size-[18px]" />
-              </Link>
-            </article>
-          ))}
+                <ul className="mb-8 space-y-3">
+                  {benefits.map((benefit) => (
+                    <li
+                      key={benefit}
+                      className="flex items-start gap-2.5 text-sm leading-relaxed text-alpha-navy/80"
+                    >
+                      <Check
+                        aria-hidden="true"
+                        className="mt-0.5 size-4 shrink-0 text-alpha-navy"
+                      />
+                      {benefit}
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  to="/auth"
+                  className="mt-auto inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-lg bg-alpha-navy px-4 py-2.5 text-sm font-semibold text-alpha-white transition-colors hover:bg-alpha-navy/90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpha-orange"
+                >
+                  {action}
+                  <ArrowRight aria-hidden="true" className="size-4" />
+                </Link>
+              </article>
+            ),
+          )}
         </div>
       </div>
     </section>

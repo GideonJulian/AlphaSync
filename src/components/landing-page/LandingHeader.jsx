@@ -6,12 +6,12 @@ const navigation = [
   { label: 'Explore Traders', href: '#user-types' },
   { label: 'How it Works', href: '#how-it-works' },
   { label: 'Security', href: '#security' },
-  { label: 'Pricing', href: '#get-started' },
+  { label: 'Get started', href: '#get-started' },
 ]
 
 function LandingHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-alpha-border bg-alpha-white/95 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-alpha-border bg-alpha-white">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
         <LandingBrand />
         <nav aria-label="Main navigation" className="hidden items-center gap-8 md:flex">

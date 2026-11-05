@@ -1,9 +1,9 @@
 import LandingBrand from './LandingBrand.jsx'
 
 const footerLinks = [
-  { label: 'About', href: '#about' },
   { label: 'Explore Traders', href: '#user-types' },
-  { label: 'API', href: '#security' },
+  { label: 'How it Works', href: '#how-it-works' },
+  { label: 'Security', href: '#security' },
   { label: 'Terms', href: '#terms' },
   { label: 'Privacy', href: '#privacy' },
 ]

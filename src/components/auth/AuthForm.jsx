@@ -1,6 +1,9 @@
 import { ArrowRight, Eye, EyeOff } from 'lucide-react'
 import { useState } from 'react'
 
+const passwordMinimumLength = 6
+const passwordLengthMessage = 'Password must be at least 6 characters.'
+
 function AuthForm({
   mode,
   onForgotPassword,
@@ -14,6 +17,16 @@ function AuthForm({
   const submitLabel = registering
     ? `Create ${role === 'copier' ? 'Copier' : 'Trader'} Account`
     : 'Sign In'
+  function handlePasswordChange(event) {
+    const { value } = event.target
+    setPassword(value)
+    event.target.setCustomValidity(
+      value.length > 0 && value.length < passwordMinimumLength
+        ? passwordLengthMessage
+        : '',
+    )
+  }
+
   const strength = password.length === 0
     ? 0
     : password.length < 6
@@ -103,9 +116,14 @@ function AuthForm({
             type={passwordVisible ? 'text' : 'password'}
             autoComplete={registering ? 'new-password' : 'current-password'}
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
-            placeholder={registering ? 'At least 10 characters' : '••••••••••••'}
-            minLength={registering ? 10 : undefined}
+            onChange={handlePasswordChange}
+            onInvalid={(event) => {
+              if (event.currentTarget.value.length > 0) {
+                event.currentTarget.setCustomValidity(passwordLengthMessage)
+              }
+            }}
+            placeholder={registering ? 'At least 6 characters' : '••••••••••••'}
+            minLength={passwordMinimumLength}
             required
             className="h-11 w-full rounded-lg border border-alpha-border bg-alpha-white pl-3 pr-11 font-mono text-sm text-alpha-black shadow-sm outline-none transition-all placeholder:font-sans placeholder:text-alpha-navy/40 focus:border-alpha-navy focus:ring-1 focus:ring-alpha-navy motion-reduce:transition-none sm:pl-4"
           />
@@ -123,6 +141,9 @@ function AuthForm({
             )}
           </button>
         </div>
+        <p className="mt-1 text-xs text-alpha-navy/60">
+          {passwordLengthMessage}
+        </p>
         {registering && (
           <>
             <div className="mt-2 flex flex-col gap-1 pt-1 md:hidden">
@@ -151,7 +172,7 @@ function AuthForm({
               Entropy: Standard Security
             </span>
             <span className="font-mono text-[11px] text-alpha-navy/50">
-              Min 10 chars
+              Min 6 chars
             </span>
             </div>
           </>

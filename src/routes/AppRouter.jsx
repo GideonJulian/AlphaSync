@@ -1,7 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import AuthLayout from '../layouts/AuthLayout.jsx'
-import DashboardLayout from '../layouts/DashboardLayout.jsx'
+import CopierLayout from '../layouts/CopierLayout.jsx'
 import PublicLayout from '../layouts/PublicLayout.jsx'
+import TraderLayout from '../layouts/TraderLayout.jsx'
 import AuthPage from '../pages/auth/AuthPage.jsx'
 import CopierDashboard from '../pages/copier/CopierDashboard.jsx'
 import LandingPage from '../pages/public/LandingPage.jsx'
@@ -21,13 +22,21 @@ const router = createBrowserRouter([
   },
   {
     path: '/copier',
-    element: <DashboardLayout />,
-    children: [{ path: 'dashboard', element: <CopierDashboard /> }],
+    element: <CopierLayout />,
+    children: [
+      { index: true, element: <NotFoundPage /> },
+      { path: 'dashboard', element: <CopierDashboard /> },
+      { path: '*', element: <NotFoundPage /> },
+    ],
   },
   {
     path: '/trader',
-    element: <DashboardLayout />,
-    children: [{ path: 'dashboard', element: <TraderDashboard /> }],
+    element: <TraderLayout />,
+    children: [
+      { index: true, element: <NotFoundPage /> },
+      { path: 'dashboard', element: <TraderDashboard /> },
+      { path: '*', element: <NotFoundPage /> },
+    ],
   },
   {
     path: '*',

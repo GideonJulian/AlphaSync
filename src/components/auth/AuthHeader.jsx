@@ -12,18 +12,7 @@ function AuthHeader() {
         >
           AlphaSync
         </Link>
-        <div className="flex items-center gap-2">
-          <Link
-            to="/"
-            className="inline-flex min-h-11 items-center gap-1.5 px-2 text-sm font-semibold text-alpha-navy/70 transition-colors hover:text-alpha-black focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpha-orange motion-reduce:transition-none lg:min-h-0 lg:px-0"
-          >
-            Back to Home
-            <ArrowRight aria-hidden="true" className="size-[18px] lg:size-4" />
-          </Link>
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-alpha-navy text-alpha-white lg:hidden">
-            <UserRound aria-hidden="true" className="size-[18px]" />
-          </span>
-        </div>
+      
       </div>
     </header>
   )

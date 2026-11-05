@@ -1,11 +1,12 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AuthForm from '../../components/auth/AuthForm.jsx'
 import AuthHeader from '../../components/auth/AuthHeader.jsx'
 import AuthMarketingPanel from '../../components/auth/AuthMarketingPanel.jsx'
 import RoleSelector from '../../components/auth/RoleSelector.jsx'
-import SocialAuth from '../../components/auth/SocialAuth.jsx'
 
 function AuthPage() {
+  const navigate = useNavigate()
   const [mode, setMode] = useState('register')
   const [role, setRole] = useState('copier')
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -15,12 +16,17 @@ function AuthPage() {
     setMode((currentMode) =>
       currentMode === 'register' ? 'login' : 'register',
     )
-    setNotice('')
+    
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    setNotice('Authentication is not connected yet.')
+    if (mode === 'register') {
+      navigate(role === 'copier' ? '/copier/dashboard' : '/trader/dashboard')
+      return
+    }
+
+    setNotice('Login is not connected yet.')
   }
 
   return (
@@ -83,13 +89,18 @@ function AuthPage() {
               setNotice('Password reset is not connected yet.')
             }
           />
-
+          {notice && (
+            <p role="status" className="mt-3 text-center text-xs text-alpha-navy/70">
+              {notice}
+            </p>
+          )}
+{/* 
           <SocialAuth
             notice={notice}
             onContinue={() =>
               setNotice('Google sign-in is not connected yet.')
             }
-          />
+          /> */}
 
           <p className="pt-5 text-center text-sm leading-5 text-alpha-navy/70 lg:pt-6 lg:text-[13px]">
             {mode === 'register'

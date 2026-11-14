@@ -5,6 +5,7 @@ import PublicLayout from '../layouts/PublicLayout.jsx'
 import TraderLayout from '../layouts/TraderLayout.jsx'
 import AuthPage from '../pages/auth/AuthPage.jsx'
 import CopierDashboard from '../pages/copier/CopierDashboard.jsx'
+import CopierMarketplace from '../pages/copier/CopierMarketplace.jsx'
 import LandingPage from '../pages/public/LandingPage.jsx'
 import TraderDashboard from '../pages/trader/TraderDashboard.jsx'
 import NotFoundPage from '../pages/NotFoundPage.jsx'
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <NotFoundPage /> },
       { path: 'dashboard', element: <CopierDashboard /> },
+      { path: 'marketplace', element: <CopierMarketplace /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

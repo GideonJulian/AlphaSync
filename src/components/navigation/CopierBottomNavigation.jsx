@@ -5,10 +5,11 @@ import {
   Search,
   UserRound,
 } from 'lucide-react'
+import { NavLink } from 'react-router-dom'
 
 const items = [
-  { label: 'Home', href: '#dashboard', icon: House, active: true },
-  { label: 'Discover', href: '#strategies', icon: Search },
+  { label: 'Home', to: '/copier/dashboard', icon: House, end: true },
+  { label: 'Discover', to: '/copier/marketplace', icon: Search },
   { label: 'Positions', href: '#positions', icon: ChartNoAxesCombined },
   { label: 'History', disabled: true, icon: Clock3 },
   { label: 'Profile', disabled: true, icon: UserRound },
@@ -21,13 +22,8 @@ function CopierBottomNavigation() {
       className="fixed inset-x-0 bottom-0 z-30 border-t border-alpha-border bg-alpha-white pb-[env(safe-area-inset-bottom)] md:hidden"
     >
       <div className="flex gap-1 px-3 py-1.5">
-        {items.map(({ active, disabled, href, icon: Icon, label }) => {
-          const className = `flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-1 transition-colors ${
-            active
-              ? 'text-alpha-navy'
-              : 'text-alpha-navy/70 hover:text-alpha-navy'
-          }`
-          const content = (
+        {items.map(({ disabled, end, href, icon: Icon, label, to }) => {
+          const content = (active = false) => (
             <>
               <span className="flex h-6 items-center justify-center">
                 <Icon
@@ -53,10 +49,27 @@ function CopierBottomNavigation() {
                 key={label}
                 aria-disabled="true"
                 title={`${label} is not available yet`}
-                className={`${className} cursor-not-allowed opacity-45`}
+                className="flex min-w-0 flex-1 cursor-not-allowed flex-col items-center justify-center gap-0.5 rounded-lg py-1 text-alpha-navy/70 opacity-45"
               >
-                {content}
+                {content()}
               </span>
+            )
+          }
+
+          if (to) {
+            return (
+            <NavLink
+              key={label}
+              to={to}
+              end={end}
+              className={({ isActive }) =>
+                `flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-1 transition-colors ${
+                  isActive ? 'text-alpha-navy' : 'text-alpha-navy/70 hover:text-alpha-navy'
+                }`
+              }
+            >
+              {({ isActive }) => content(isActive)}
+            </NavLink>
             )
           }
 
@@ -64,10 +77,9 @@ function CopierBottomNavigation() {
             <a
               key={label}
               href={href}
-              aria-current={active ? 'page' : undefined}
-              className={className}
+              className="flex min-w-0 flex-1 flex-col items-center justify-center gap-0.5 rounded-lg py-1 text-alpha-navy/70 transition-colors hover:text-alpha-navy"
             >
-              {content}
+              {content()}
             </a>
           )
         })}

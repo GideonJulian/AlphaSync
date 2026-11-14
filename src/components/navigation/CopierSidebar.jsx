@@ -12,8 +12,8 @@ import {
 import DashboardNavigation from './DashboardNavigation.jsx'
 
 const navigationItems = [
-  { label: 'Home', href: '#dashboard', icon: Grid2X2, active: true },
-  { label: 'Marketplace', href: '#strategies', icon: Store },
+  { label: 'Home', to: '/copier/dashboard', icon: Grid2X2, end: true },
+  { label: 'Marketplace', to: '/copier/marketplace', icon: Store },
   { label: 'My Strategies', href: '#strategies', icon: BrainCircuit },
   { label: 'Positions', href: '#positions', icon: CandlestickChart },
   { label: 'Trade History', disabled: true, icon: History },

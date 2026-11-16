@@ -7,9 +7,9 @@ import {
   ShieldCheck,
   SlidersHorizontal,
 } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 import DashboardHeader from '../../components/copier-dashboard/DashboardHeader.jsx'
 import TraderStrategyCard from '../../components/copier-dashboard/TraderStrategyCard.jsx'
-import Modal from '../../components/ui/Modal.jsx'
 import copierStrategies from '../../constants/copierStrategies.js'
 
 const sortOptions = [
@@ -20,10 +20,10 @@ const sortOptions = [
 ]
 
 function CopierMarketplace() {
+  const navigate = useNavigate()
   const [search, setSearch] = useState('')
   const [sortBy, setSortBy] = useState('return30d')
   const [sortMenuOpen, setSortMenuOpen] = useState(false)
-  const [selectedStrategy, setSelectedStrategy] = useState(null)
   const sortMenuRef = useRef(null)
 
   useEffect(() => {
@@ -67,6 +67,9 @@ function CopierMarketplace() {
   )
   const selectedSortLabel =
     sortOptions.find((option) => option.value === sortBy)?.label ?? sortOptions[0].label
+  const handleViewStrategy = (strategy) => {
+    navigate(`/copier/marketplace/${strategy.id}`)
+  }
 
   return (
     <div className="min-h-screen overflow-x-hidden bg-alpha-border/30 text-alpha-black">
@@ -223,7 +226,7 @@ function CopierMarketplace() {
                       <TraderStrategyCard
                         key={strategy.id}
                         featured
-                        onView={setSelectedStrategy}
+                        onView={handleViewStrategy}
                         strategy={strategy}
                       />
                     ))}
@@ -247,7 +250,7 @@ function CopierMarketplace() {
                     {visibleStrategies.map((strategy) => (
                       <TraderStrategyCard
                         key={strategy.id}
-                        onView={setSelectedStrategy}
+                        onView={handleViewStrategy}
                         strategy={strategy}
                       />
                     ))}
@@ -261,28 +264,6 @@ function CopierMarketplace() {
         </div>
       </div>
 
-      <Modal
-        open={Boolean(selectedStrategy)}
-        onClose={() => setSelectedStrategy(null)}
-        title={selectedStrategy?.strategy}
-      >
-        {selectedStrategy && (
-          <div className="space-y-4">
-            <p className="text-sm text-alpha-navy/70">
-              Trader: <strong className="text-alpha-navy">{selectedStrategy.trader}</strong>
-            </p>
-            <div className="grid grid-cols-2 gap-3 rounded-lg bg-alpha-border/30 p-4">
-              <Detail label="30-day return" value={`+${selectedStrategy.return30d}%`} />
-              <Detail label="Win rate" value={`${selectedStrategy.winRate}%`} />
-              <Detail label="Profit factor" value={selectedStrategy.profitFactor.toFixed(2)} />
-              <Detail label="Max drawdown" value={`${selectedStrategy.drawdown}%`} />
-            </div>
-            <p className="text-xs leading-relaxed text-alpha-navy/60">
-              Historical performance is provided for comparison only and does not guarantee future results.
-            </p>
-          </div>
-        )}
-      </Modal>
     </div>
   )
 }
@@ -296,15 +277,6 @@ function EmptyState({ query, section }) {
           ? `Try another trader or strategy name to find ${section}.`
           : `There are no ${section} to show right now.`}
       </p>
-    </div>
-  )
-}
-
-function Detail({ label, value }) {
-  return (
-    <div>
-      <p className="text-xs text-alpha-navy/60">{label}</p>
-      <p className="mt-1 font-semibold text-alpha-navy">{value}</p>
     </div>
   )
 }

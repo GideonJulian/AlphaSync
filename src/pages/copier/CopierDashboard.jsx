@@ -17,6 +17,7 @@ import {
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import DashboardHeader from '../../components/copier-dashboard/DashboardHeader.jsx'
+import WalletSection from '../../components/copier-dashboard/WalletSection.jsx'
 
 const newUserStrategies = [
   {
@@ -293,7 +294,7 @@ function PerformanceChart({ period, onPeriodChange }) {
         </div>
       </div>
 
-      <div className="relative h-64 min-w-[560px] select-none">
+      <div className="relative h-64 min-w-0 select-none md:min-w-[560px]">
         <svg
           aria-label={`Equity balance performance chart for ${period}`}
           role="img"
@@ -710,19 +711,27 @@ function renderExistingUserDashboard({
   notice,
   setNotice,
   visiblePositions,
+  walletModalOpen,
+  setWalletModalOpen,
 }) {
   return (
     <div id="dashboard" className="min-h-screen overflow-x-hidden bg-alpha-border/30 text-alpha-black">
       <main className="min-h-screen min-w-0 px-4 py-6 sm:px-6 md:px-8 lg:px-10">
         <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-6">
-          <header className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+          <header className="order-1 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
             <div>
-              <p className="text-xs font-medium text-alpha-navy/70">Copier Dashboard</p>
-              <h1 className="text-2xl font-bold tracking-tight text-alpha-navy">
-                Portfolio Overview
-              </h1>
+              <p className="text-xs font-medium text-alpha-navy/70 sm:hidden">Portfolio Overview</p>
+              <div className="flex flex-wrap items-center gap-3">
+                <h1 className="text-2xl font-bold tracking-tight text-alpha-navy">
+                  Good morning, Alex
+                </h1>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-alpha-border/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-alpha-navy">
+                  <span className="size-2 animate-pulse rounded-full bg-alpha-orange motion-reduce:animate-none" />
+                  Copying Active
+                </span>
+              </div>
               <p className="mt-1 text-sm text-alpha-navy/70">
-                Monitor your account, copied strategies, and open positions.
+                Your automated portfolio is running with institutional guardrails enabled.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-2">
@@ -733,32 +742,25 @@ function renderExistingUserDashboard({
               >
                 <Bell aria-hidden="true" className="size-5 text-alpha-navy" />
               </button>
-              <button
-                type="button"
-                onClick={() => setNotice('Deposits will be available when your account is connected to a broker.')}
-                className="inline-flex h-10 items-center gap-2 rounded-lg border border-alpha-border bg-alpha-white px-4 text-sm font-semibold text-alpha-navy transition-colors hover:bg-alpha-border/40"
-              >
-                <Wallet aria-hidden="true" className="size-4" />
-                Deposit Funds
-              </button>
-              <a
-                href="#strategies"
+
+              <Link
+                to="/copier/marketplace"
                 className="inline-flex h-10 items-center gap-2 rounded-lg bg-alpha-orange px-4 text-sm font-semibold text-alpha-navy transition-colors hover:bg-alpha-orange/85"
               >
                 <Store aria-hidden="true" className="size-4" />
                 Discover Traders
-              </a>
+              </Link>
             </div>
           </header>
 
           {notice && (
-            <p role="status" className="rounded-lg border border-alpha-border bg-alpha-white px-4 py-2 text-sm text-alpha-navy">
+            <p role="status" className="order-2 rounded-lg border border-alpha-border bg-alpha-white px-4 py-2 text-sm text-alpha-navy">
               {notice}
             </p>
           )}
 
-          <div className="grid grid-cols-1 gap-6 xl:grid-cols-12">
-            <MetricCard className="xl:col-span-5">
+          <div className="contents xl:order-3 xl:grid xl:grid-cols-12 xl:gap-6">
+            <MetricCard id="equity-summary" className="order-3 xl:order-none xl:col-span-5">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-alpha-navy/70">
@@ -793,7 +795,7 @@ function renderExistingUserDashboard({
               </div>
             </MetricCard>
 
-            <MetricCard className="xl:col-span-4">
+            <MetricCard id="deployment-summary" className="order-5 xl:order-none xl:col-span-4">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between gap-2">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-alpha-navy/70">
@@ -830,7 +832,7 @@ function renderExistingUserDashboard({
               </div>
             </MetricCard>
 
-            <MetricCard id="risk" className="xl:col-span-3">
+            <MetricCard id="risk" className="order-6 xl:order-none xl:col-span-3">
               <div className="flex flex-col gap-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[11px] font-semibold uppercase tracking-wider text-alpha-navy/70">
@@ -866,11 +868,17 @@ function renderExistingUserDashboard({
             </MetricCard>
           </div>
 
-          <div className="overflow-x-auto">
+          <WalletSection
+            modalOpen={walletModalOpen}
+            onAddFunds={() => setWalletModalOpen(true)}
+            onCloseModal={() => setWalletModalOpen(false)}
+          />
+
+          <div className="order-7 overflow-x-auto xl:order-5">
             <PerformanceChart period={period} onPeriodChange={setPeriod} />
           </div>
 
-          <section id="strategies" className="flex flex-col gap-4">
+          <section id="strategies" className="order-8 flex flex-col gap-4 xl:order-6">
             <div className="flex flex-col justify-between gap-2 sm:flex-row sm:items-center">
               <div>
                 <h2 className="text-base font-semibold tracking-tight text-alpha-black">
@@ -902,7 +910,7 @@ function renderExistingUserDashboard({
           <section
             id="positions"
             aria-labelledby="positions-title"
-            className="mb-4 flex flex-col overflow-hidden rounded-xl border border-alpha-border bg-alpha-white"
+            className="order-9 mb-4 flex flex-col overflow-hidden rounded-xl border border-alpha-border bg-alpha-white xl:order-8"
           >
             <div className="flex items-center justify-between gap-3 border-b border-alpha-border px-4 py-4 sm:px-6">
               <div className="flex items-center gap-2">
@@ -1012,7 +1020,7 @@ function renderExistingUserDashboard({
 
 function CopierDashboard() {
   const mockCopierAccount = {
-    hasConnectedMT5: false,
+    hasConnectedMT5: true,
     hasActiveSubscription: false,
   }
   const [search, setSearch] = useState('')
@@ -1021,6 +1029,7 @@ function CopierDashboard() {
   const [buyOnly, setBuyOnly] = useState(false)
   const [updatedAt, setUpdatedAt] = useState('')
   const [existingUserNotice, setExistingUserNotice] = useState('')
+  const [walletModalOpen, setWalletModalOpen] = useState(false)
   const visibleStrategies = useMemo(
     () =>
       newUserStrategies.filter((strategy) =>
@@ -1045,6 +1054,8 @@ function CopierDashboard() {
       notice: existingUserNotice,
       setNotice: setExistingUserNotice,
       visiblePositions,
+      walletModalOpen,
+      setWalletModalOpen,
     })
   ) : (
     renderNewUserDashboard({

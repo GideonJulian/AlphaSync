@@ -1,0 +1,238 @@
+const copierTraderDetails = {
+  'atlas-fx': {
+    strategyCode: 'AF-9024',
+    tier: 'Atlas FX Pro',
+    monthlyPrice: 39,
+    auditedMonths: 18,
+    summary:
+      'Systematic momentum strategy focused on forex majors and gold, built around disciplined entries and defined risk limits.',
+    description:
+      'The Atlas FX model looks for momentum breakouts during liquid market sessions and uses volatility-based exits. Position sizing and protective stops are defined before each trade.',
+    tradingStyle: 'Systematic Momentum',
+    markets: ['Forex Majors', 'Gold (XAU)'],
+    typicalHold: '4.2 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Moderate (3/10)',
+    minCapital: 1000,
+    totalReturn: 64.2,
+    sharpeRatio: 2.41,
+    activeCopiers: 842,
+    rating: 4.8,
+    reviewCount: 1284,
+    chartTrend: [0.08, 0.16, 0.13, 0.25, 0.32, 0.29, 0.43, 0.5, 0.47, 0.64, 0.7, 0.78, 0.96],
+    guardrails: {
+      maxDrawdownStop: '10%',
+      lotMultiplier: '0.5x–2.0x',
+      maxOpenPositions: 5,
+      description:
+        'Capital protection uses a configurable equity stop, proportional position sizing, and a hard limit on simultaneous positions.',
+    },
+    trades: [
+      { symbol: 'XAUUSD', direction: 'BUY', entry: '2,382.40', exit: '2,396.65', duration: '2h 14m', pnl: 142.5 },
+      { symbol: 'EURUSD', direction: 'SELL', entry: '1.08940', exit: '1.08825', duration: '48m', pnl: 57.5 },
+      { symbol: 'GBPUSD', direction: 'BUY', entry: '1.27110', exit: '1.27278', duration: '1h 35m', pnl: 84.2 },
+      { symbol: 'US30', direction: 'SELL', entry: '42,180', exit: '42,060', duration: '56m', pnl: 120 },
+    ],
+    reviews: [
+      'Clear strategy and consistent risk controls. The trading approach is easy to understand.',
+      'Transparent performance details and a disciplined process.',
+    ],
+  },
+  'apex-momentum': {
+    strategyCode: 'AM-4418',
+    tier: 'Apex Momentum Plus',
+    monthlyPrice: 49,
+    auditedMonths: 24,
+    summary:
+      'A multi-market trend strategy that follows sustained price moves with rules-based entries and exits.',
+    description:
+      'Apex Momentum scans liquid currency pairs and index markets for persistent directional movement. Trades use volatility-adjusted stops and predefined exposure limits.',
+    tradingStyle: 'Multi-Asset Trend Following',
+    markets: ['Forex', 'Global Indices'],
+    typicalHold: '6.5 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Moderate (4/10)',
+    minCapital: 1500,
+    totalReturn: 52.8,
+    sharpeRatio: 1.94,
+    activeCopiers: 691,
+    rating: 4.7,
+    reviewCount: 936,
+    chartTrend: [0.12, 0.18, 0.15, 0.22, 0.38, 0.35, 0.4, 0.54, 0.52, 0.63, 0.59, 0.76, 0.88],
+    guardrails: {
+      maxDrawdownStop: '12%',
+      lotMultiplier: '0.5x–1.8x',
+      maxOpenPositions: 4,
+      description:
+        'Exposure is limited across correlated markets, with an equity stop and a cap on concurrent copied positions.',
+    },
+    trades: [
+      { symbol: 'NAS100', direction: 'BUY', entry: '18,245', exit: '18,318', duration: '3h 08m', pnl: 218.4 },
+      { symbol: 'EURUSD', direction: 'SELL', entry: '1.09410', exit: '1.09295', duration: '1h 12m', pnl: 73.1 },
+      { symbol: 'GBPJPY', direction: 'BUY', entry: '191.240', exit: '191.610', duration: '2h 42m', pnl: 96.8 },
+      { symbol: 'US500', direction: 'SELL', entry: '5,288.4', exit: '5,273.1', duration: '1h 50m', pnl: 154.2 },
+    ],
+    reviews: [
+      'The trend rules are clear, and the risk settings are easy to follow.',
+      'A useful diversified approach across several liquid markets.',
+    ],
+  },
+  'kaufman-quant': {
+    strategyCode: 'KQ-3186',
+    tier: 'Kaufman Quant System',
+    monthlyPrice: 59,
+    auditedMonths: 38,
+    summary:
+      'A quantitative approach using adaptive signals and measured exposure across major currency pairs.',
+    description:
+      'Kaufman Quant uses adaptive filters to identify changing market regimes. Signal strength and volatility both inform entries, exits, and position sizing.',
+    tradingStyle: 'Adaptive Quantitative',
+    markets: ['Forex Majors', 'Gold (XAU)'],
+    typicalHold: '3.1 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Low–Moderate (2/10)',
+    minCapital: 2000,
+    totalReturn: 78.6,
+    sharpeRatio: 2.63,
+    activeCopiers: 1048,
+    rating: 4.9,
+    reviewCount: 1512,
+    chartTrend: [0.05, 0.09, 0.2, 0.18, 0.34, 0.39, 0.36, 0.57, 0.61, 0.58, 0.73, 0.83, 0.98],
+    guardrails: {
+      maxDrawdownStop: '8%',
+      lotMultiplier: '0.5x–1.5x',
+      maxOpenPositions: 3,
+      description:
+        'Conservative sizing and a lower position cap are paired with a strict account-level drawdown threshold.',
+    },
+    trades: [
+      { symbol: 'USDJPY', direction: 'SELL', entry: '149.820', exit: '149.510', duration: '1h 46m', pnl: 109.2 },
+      { symbol: 'XAUUSD', direction: 'BUY', entry: '2,351.60', exit: '2,367.10', duration: '3h 22m', pnl: 181.5 },
+      { symbol: 'AUDUSD', direction: 'BUY', entry: '0.66120', exit: '0.66305', duration: '2h 05m', pnl: 62.4 },
+      { symbol: 'EURGBP', direction: 'SELL', entry: '0.85640', exit: '0.85510', duration: '1h 18m', pnl: 54.7 },
+    ],
+    reviews: [
+      'The strategy is systematic and its risk limits are clearly described.',
+      'Helpful diversification with measured position sizing.',
+    ],
+  },
+  'london-breakout': {
+    strategyCode: 'LB-2075',
+    tier: 'London Breakout',
+    monthlyPrice: 35,
+    auditedMonths: 16,
+    summary:
+      'A session-based breakout strategy focused on selected currency pairs during the London open.',
+    description:
+      'London Breakout measures the early-session range and waits for confirmed price expansion. The strategy limits the number of daily entries and defines a stop for each position.',
+    tradingStyle: 'Session Breakout',
+    markets: ['GBP Pairs', 'EUR Pairs'],
+    typicalHold: '2.8 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Moderate (4/10)',
+    minCapital: 1000,
+    totalReturn: 38.1,
+    sharpeRatio: 1.76,
+    activeCopiers: 438,
+    rating: 4.6,
+    reviewCount: 512,
+    chartTrend: [0.08, 0.2, 0.16, 0.29, 0.25, 0.37, 0.45, 0.41, 0.53, 0.62, 0.59, 0.72, 0.84],
+    guardrails: {
+      maxDrawdownStop: '11%',
+      lotMultiplier: '0.5x–1.6x',
+      maxOpenPositions: 4,
+      description:
+        'Daily entry limits and an account drawdown stop help manage the strategy’s session-specific exposure.',
+    },
+    trades: [
+      { symbol: 'GBPUSD', direction: 'BUY', entry: '1.26740', exit: '1.26910', duration: '1h 42m', pnl: 81.6 },
+      { symbol: 'EURGBP', direction: 'SELL', entry: '0.85590', exit: '0.85485', duration: '56m', pnl: 49.2 },
+      { symbol: 'GBPJPY', direction: 'BUY', entry: '190.620', exit: '190.910', duration: '2h 12m', pnl: 72.8 },
+      { symbol: 'EURUSD', direction: 'SELL', entry: '1.08610', exit: '1.08505', duration: '44m', pnl: 39.5 },
+    ],
+    reviews: [
+      'The session focus makes this strategy’s approach straightforward to evaluate.',
+      'Clear trade limits and an easy-to-follow process.',
+    ],
+  },
+  'aura-indices': {
+    strategyCode: 'AI-7632',
+    tier: 'Aura Indices',
+    monthlyPrice: 45,
+    auditedMonths: 21,
+    summary:
+      'A rules-led index strategy designed to capture measured moves while limiting correlated exposure.',
+    description:
+      'Aura Indices monitors a small group of major equity indices. Entries are filtered by trend and volatility conditions, with risk limits applied to total open exposure.',
+    tradingStyle: 'Index Trend Model',
+    markets: ['US Indices', 'European Indices'],
+    typicalHold: '5.7 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Moderate (5/10)',
+    minCapital: 2500,
+    totalReturn: 57.3,
+    sharpeRatio: 2.08,
+    activeCopiers: 574,
+    rating: 4.7,
+    reviewCount: 688,
+    chartTrend: [0.1, 0.14, 0.28, 0.24, 0.3, 0.44, 0.42, 0.55, 0.49, 0.68, 0.74, 0.71, 0.92],
+    guardrails: {
+      maxDrawdownStop: '13%',
+      lotMultiplier: '0.5x–1.7x',
+      maxOpenPositions: 3,
+      description:
+        'A three-position cap and index exposure checks are combined with a predefined account-level drawdown threshold.',
+    },
+    trades: [
+      { symbol: 'US30', direction: 'BUY', entry: '39,120', exit: '39,285', duration: '2h 35m', pnl: 165 },
+      { symbol: 'GER40', direction: 'SELL', entry: '18,412', exit: '18,365', duration: '1h 08m', pnl: 94.1 },
+      { symbol: 'NAS100', direction: 'BUY', entry: '17,965', exit: '18,010', duration: '3h 16m', pnl: 135.7 },
+      { symbol: 'US500', direction: 'SELL', entry: '5,204.8', exit: '5,190.2', duration: '1h 26m', pnl: 73.4 },
+    ],
+    reviews: [
+      'The smaller market set makes it easier to understand the sources of exposure.',
+      'Good explanation of how positions are limited across indices.',
+    ],
+  },
+  'zenith-macro': {
+    strategyCode: 'ZM-5891',
+    tier: 'Zenith Macro',
+    monthlyPrice: 29,
+    auditedMonths: 14,
+    summary:
+      'A measured macro trend approach combining major currency pairs with selective commodity exposure.',
+    description:
+      'Zenith Macro uses higher-timeframe direction and volatility filters to select a limited number of trades. The model favors patient entries and predefined exit levels.',
+    tradingStyle: 'Macro Trend Following',
+    markets: ['Forex Majors', 'Commodities'],
+    typicalHold: '9.3 hours',
+    broker: 'MT5 compatible',
+    riskLevel: 'Low–Moderate (3/10)',
+    minCapital: 1200,
+    totalReturn: 33.9,
+    sharpeRatio: 1.98,
+    activeCopiers: 326,
+    rating: 4.5,
+    reviewCount: 401,
+    chartTrend: [0.12, 0.1, 0.21, 0.27, 0.24, 0.38, 0.36, 0.45, 0.57, 0.55, 0.66, 0.71, 0.82],
+    guardrails: {
+      maxDrawdownStop: '9%',
+      lotMultiplier: '0.5x–1.5x',
+      maxOpenPositions: 3,
+      description:
+        'The model keeps a smaller concurrent position count and applies a fixed account drawdown limit.',
+    },
+    trades: [
+      { symbol: 'AUDUSD', direction: 'SELL', entry: '0.65820', exit: '0.65680', duration: '4h 10m', pnl: 70.3 },
+      { symbol: 'XAUUSD', direction: 'BUY', entry: '2,318.20', exit: '2,329.50', duration: '6h 22m', pnl: 113 },
+      { symbol: 'USDCAD', direction: 'BUY', entry: '1.36210', exit: '1.36340', duration: '3h 44m', pnl: 65.2 },
+      { symbol: 'EURUSD', direction: 'SELL', entry: '1.07860', exit: '1.07730', duration: '5h 06m', pnl: 61.8 },
+    ],
+    reviews: [
+      'A measured approach with clear entry and exit levels.',
+      'I appreciate the emphasis on limited exposure and patience.',
+    ],
+  },
+}
+
+export default copierTraderDetails

@@ -8,6 +8,7 @@ import {
   Settings,
   Store,
   UserRound,
+  Wallet,
 } from 'lucide-react'
 import DashboardNavigation from './DashboardNavigation.jsx'
 
@@ -18,7 +19,7 @@ const navigationItems = [
   { label: 'Positions', href: '#positions', icon: CandlestickChart },
   { label: 'Trade History', disabled: true, icon: History },
   { label: 'Performance', href: '#performance', icon: ChartNoAxesCombined },
-  { label: 'Wallet', disabled: true },
+  { label: 'Wallet', href: '/copier/dashboard#wallet', icon: Wallet },
   { label: 'Settings', href: '#risk', icon: Settings },
 ]
 

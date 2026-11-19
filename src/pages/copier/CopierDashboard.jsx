@@ -16,6 +16,7 @@ import {
   Wallet
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import ConnectMt5Modal from '../../components/copier-dashboard/ConnectMt5Modal.jsx'
 import DashboardHeader from '../../components/copier-dashboard/DashboardHeader.jsx'
 import WalletSection from '../../components/copier-dashboard/WalletSection.jsx'
 
@@ -403,6 +404,8 @@ function StrategyCard({ strategy, onView }) {
 }
 
 function renderNewUserDashboard({
+  connectModalOpen,
+  setConnectModalOpen,
   search,
   setSearch,
   notice,
@@ -414,8 +417,7 @@ function renderNewUserDashboard({
     { number: '2', title: 'Choose a strategy', description: 'Explore verified traders', action: 'Explore' },
     { number: '3', title: 'Set your risk', description: 'Choose risk preferences', action: 'Set risk' },
   ]
-  const handleConnect = () =>
-    setNotice('MT5 connection is not available in this preview.')
+  const handleConnect = () => setConnectModalOpen(true)
 
   return (
     <div id="dashboard" className="min-h-screen overflow-x-hidden bg-alpha-border/30 text-alpha-black">
@@ -477,6 +479,7 @@ function renderNewUserDashboard({
                 <div className="flex flex-col items-start gap-4 pt-1 sm:flex-row sm:items-center">
                   <button
                     type="button"
+                    aria-haspopup="dialog"
                     onClick={handleConnect}
                     className="inline-flex items-center justify-center gap-2.5 rounded-lg bg-alpha-orange px-6 py-3.5 text-sm font-bold tracking-wide text-alpha-navy transition-colors hover:bg-alpha-orange/85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-alpha-navy"
                   >
@@ -621,6 +624,7 @@ function renderNewUserDashboard({
             </div>
             <button
               type="button"
+              aria-haspopup="dialog"
               onClick={handleConnect}
               className="flex h-12 w-full items-center justify-center gap-2 rounded-lg bg-alpha-orange text-sm font-bold text-alpha-navy transition-colors hover:bg-alpha-orange/85 active:scale-[0.99]"
             >
@@ -697,6 +701,10 @@ function renderNewUserDashboard({
           </footer>
         </div>
       </div>
+      <ConnectMt5Modal
+        open={connectModalOpen}
+        onClose={() => setConnectModalOpen(false)}
+      />
     </div>
   )
 }
@@ -1025,6 +1033,7 @@ function CopierDashboard() {
   }
   const [search, setSearch] = useState('')
   const [newUserNotice, setNewUserNotice] = useState('')
+  const [connectModalOpen, setConnectModalOpen] = useState(false)
   const [period, setPeriod] = useState('30D')
   const [buyOnly, setBuyOnly] = useState(false)
   const [updatedAt, setUpdatedAt] = useState('')
@@ -1059,6 +1068,8 @@ function CopierDashboard() {
     })
   ) : (
     renderNewUserDashboard({
+      connectModalOpen,
+      setConnectModalOpen,
       search,
       setSearch,
       notice: newUserNotice,

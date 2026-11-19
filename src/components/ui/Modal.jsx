@@ -1,7 +1,7 @@
 import { useEffect, useId } from 'react'
 import { X } from 'lucide-react'
 
-function Modal({ children, onClose, open, title }) {
+function Modal({ children, className = '', mobileSheet = false, onClose, open, title }) {
   const titleId = useId()
 
   useEffect(() => {
@@ -19,7 +19,9 @@ function Modal({ children, onClose, open, title }) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-alpha-black/50 p-4"
+      className={`fixed inset-0 z-50 flex justify-center bg-alpha-black/50 ${
+        mobileSheet ? 'items-end p-0 md:items-center md:p-4' : 'items-center p-4'
+      }`}
       onClick={(event) => {
         if (event.target === event.currentTarget) onClose?.()
       }}
@@ -29,7 +31,7 @@ function Modal({ children, onClose, open, title }) {
         aria-modal="true"
         aria-labelledby={title ? titleId : undefined}
         aria-label={title ? undefined : 'Dialog'}
-        className="w-full max-w-lg rounded-xl border border-alpha-border bg-alpha-white p-6 text-alpha-black shadow-xl"
+        className={`w-full max-w-lg rounded-xl border border-alpha-border bg-alpha-white p-6 text-alpha-black shadow-xl ${mobileSheet ? 'max-h-[90dvh] overflow-y-auto rounded-t-2xl md:rounded-xl' : ''} ${className}`}
       >
         {(title || onClose) && (
           <div className="mb-4 flex items-center justify-between gap-4">

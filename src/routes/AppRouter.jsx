@@ -6,6 +6,7 @@ import TraderLayout from '../layouts/TraderLayout.jsx'
 import AuthPage from '../pages/auth/AuthPage.jsx'
 import CopierDashboard from '../pages/copier/CopierDashboard.jsx'
 import CopierMarketplace from '../pages/copier/CopierMarketplace.jsx'
+import CopierPositionsPage from '../pages/copier/CopierPositionsPage.jsx'
 import TraderDetailsPage from '../pages/copier/TraderDetailsPage.jsx'
 import LandingPage from '../pages/public/LandingPage.jsx'
 import TraderDashboard from '../pages/trader/TraderDashboard.jsx'
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
       { path: 'dashboard', element: <CopierDashboard /> },
       { path: 'marketplace/:strategyId', element: <TraderDetailsPage /> },
       { path: 'marketplace', element: <CopierMarketplace /> },
+      { path: 'positions', element: <CopierPositionsPage /> },
       { path: '*', element: <NotFoundPage /> },
     ],
   },

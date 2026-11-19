@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom'
 const items = [
   { label: 'Home', to: '/copier/dashboard', icon: House, end: true },
   { label: 'Discover', to: '/copier/marketplace', icon: Search },
-  { label: 'Positions', href: '#positions', icon: ChartNoAxesCombined },
+  { label: 'Positions', to: '/copier/positions', icon: ChartNoAxesCombined },
   { label: 'History', disabled: true, icon: Clock3 },
   { label: 'Profile', disabled: true, icon: UserRound },
 ]

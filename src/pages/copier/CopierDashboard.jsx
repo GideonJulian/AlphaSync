@@ -1,19 +1,19 @@
 import { useMemo, useState } from 'react'
 import {
   ArrowRight,
+  BadgeCheck,
   Bell,
   Cloud,
+  Clock3,
   ExternalLink,
   Flag,
   LockKeyhole,
-  Server,
-  BadgeCheck,
-  Clock3,
   RefreshCw,
+  Server,
   Shield,
   SlidersHorizontal,
   Store,
-  Wallet
+  Wallet,
 } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ConnectMt5Modal from '../../components/copier-dashboard/ConnectMt5Modal.jsx'
@@ -184,8 +184,6 @@ function StrategyPreview({ strategy }) {
     </article>
   )
 }
-
-
 
 const existingUserStrategies = [
   {
@@ -403,7 +401,7 @@ function StrategyCard({ strategy, onView }) {
   )
 }
 
-function renderNewUserDashboard({
+function NewUserDashboard({
   connectModalOpen,
   setConnectModalOpen,
   search,
@@ -709,7 +707,7 @@ function renderNewUserDashboard({
   )
 }
 
-function renderExistingUserDashboard({
+function ExistingUserDashboard({
   period,
   setPeriod,
   buyOnly,
@@ -915,111 +913,7 @@ function renderExistingUserDashboard({
             </div>
           </section>
 
-          <section
-            id="positions"
-            aria-labelledby="positions-title"
-            className="order-9 mb-4 flex flex-col overflow-hidden rounded-xl border border-alpha-border bg-alpha-white xl:order-8"
-          >
-            <div className="flex items-center justify-between gap-3 border-b border-alpha-border px-4 py-4 sm:px-6">
-              <div className="flex items-center gap-2">
-                <h2 id="positions-title" className="text-base font-semibold text-alpha-black">
-                  Open Positions
-                </h2>
-                <span className="rounded-full bg-alpha-border px-2 py-0.5 text-[10px] font-semibold text-alpha-navy/70">
-                  3 Live
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  type="button"
-                  aria-pressed={buyOnly}
-                  onClick={() => setBuyOnly((current) => !current)}
-                  className={`inline-flex items-center gap-1 text-xs transition-colors ${
-                    buyOnly ? 'font-semibold text-alpha-navy' : 'text-alpha-navy/70 hover:text-alpha-navy'
-                  }`}
-                >
-                  <SlidersHorizontal aria-hidden="true" className="size-4" />
-                  {buyOnly ? 'Show all' : 'Filter'}
-                </button>
-                <button
-                  type="button"
-                  aria-label="Refresh open positions"
-                  onClick={() => setUpdatedAt(new Date().toLocaleTimeString())}
-                  className="inline-flex items-center gap-1 text-xs text-alpha-navy/70 transition-colors hover:text-alpha-navy"
-                  title={updatedAt ? `Refreshed at ${updatedAt}` : undefined}
-                >
-                  <RefreshCw aria-hidden="true" className="size-4" />
-                  Refresh
-                </button>
-              </div>
-            </div>
-            {updatedAt && (
-              <p role="status" className="sr-only">
-                Positions refreshed at {updatedAt}.
-              </p>
-            )}
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[850px] border-collapse text-left">
-                <thead>
-                  <tr className="border-b border-alpha-border bg-alpha-border/30">
-                    {['Symbol', 'Strategy', 'Direction', 'Lots', 'Open Price', 'Current Price', 'Unrealized P/L'].map(
-                      (heading, index) => (
-                        <th
-                          key={heading}
-                          scope="col"
-                          className={`px-5 py-3 text-[10px] font-semibold uppercase tracking-wider text-alpha-navy/70 ${
-                            index > 2 ? 'text-right' : ''
-                          }`}
-                        >
-                          {heading}
-                        </th>
-                      ),
-                    )}
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-alpha-border">
-                  {visiblePositions.map((position) => (
-                    <tr key={position.symbol} className="transition-colors hover:bg-alpha-border/20">
-                      <td className="px-5 py-4">
-                        <div className="flex items-center gap-2">
-                          <span className="flex size-7 items-center justify-center rounded bg-alpha-border text-[10px] font-semibold text-alpha-navy">
-                            {position.initials}
-                          </span>
-                          <span className="flex flex-col">
-                            <span className="text-sm font-semibold text-alpha-black">{position.symbol}</span>
-                            <span className="text-[10px] text-alpha-navy/70">{position.name}</span>
-                          </span>
-                        </div>
-                      </td>
-                      <td className="px-5 py-4 text-sm text-alpha-black">{position.strategy}</td>
-                      <td className="px-5 py-4">
-                        <span
-                          className={`rounded px-2 py-0.5 text-[10px] font-bold ${
-                            position.direction === 'SELL'
-                              ? 'bg-alpha-border text-alpha-navy'
-                              : 'bg-alpha-orange/30 text-alpha-navy'
-                          }`}
-                        >
-                          {position.direction}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4 text-right text-sm text-alpha-black">{position.lots}</td>
-                      <td className="px-5 py-4 text-right text-sm text-alpha-navy/70">{position.open}</td>
-                      <td className="px-5 py-4 text-right text-sm font-medium text-alpha-black">{position.current}</td>
-                      <td className="px-5 py-4 text-right text-sm font-semibold text-alpha-navy">{position.pnl}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            <div className="flex flex-col justify-between gap-1 border-t border-alpha-border bg-alpha-border/20 px-4 py-3 text-xs text-alpha-navy/70 sm:flex-row sm:px-6">
-              <span>Execution mode: Direct STP/ECN mirror</span>
-              <span>
-                Aggregated Net Open P/L:{' '}
-                <strong className="font-semibold text-alpha-navy">+$181.80</strong>
-              </span>
-            </div>
-          </section>
+       
         </div>
       </main>
     </div>
@@ -1029,7 +923,6 @@ function renderExistingUserDashboard({
 function CopierDashboard() {
   const mockCopierAccount = {
     hasConnectedMT5: true,
-    hasActiveSubscription: false,
   }
   const [search, setSearch] = useState('')
   const [newUserNotice, setNewUserNotice] = useState('')
@@ -1053,29 +946,29 @@ function CopierDashboard() {
     : positions
 
   return mockCopierAccount.hasConnectedMT5 ? (
-    renderExistingUserDashboard({
-      period,
-      setPeriod,
-      buyOnly,
-      setBuyOnly,
-      updatedAt,
-      setUpdatedAt,
-      notice: existingUserNotice,
-      setNotice: setExistingUserNotice,
-      visiblePositions,
-      walletModalOpen,
-      setWalletModalOpen,
-    })
+    <ExistingUserDashboard
+      period={period}
+      setPeriod={setPeriod}
+      buyOnly={buyOnly}
+      setBuyOnly={setBuyOnly}
+      updatedAt={updatedAt}
+      setUpdatedAt={setUpdatedAt}
+      notice={existingUserNotice}
+      setNotice={setExistingUserNotice}
+      visiblePositions={visiblePositions}
+      walletModalOpen={walletModalOpen}
+      setWalletModalOpen={setWalletModalOpen}
+    />
   ) : (
-    renderNewUserDashboard({
-      connectModalOpen,
-      setConnectModalOpen,
-      search,
-      setSearch,
-      notice: newUserNotice,
-      setNotice: setNewUserNotice,
-      visibleStrategies,
-    })
+    <NewUserDashboard
+      connectModalOpen={connectModalOpen}
+      setConnectModalOpen={setConnectModalOpen}
+      search={search}
+      setSearch={setSearch}
+      notice={newUserNotice}
+      setNotice={setNewUserNotice}
+      visibleStrategies={visibleStrategies}
+    />
   )
 }
 

@@ -18,7 +18,6 @@ function NavigationItem({ item, variant }) {
   if (item.disabled || (!item.href && !item.to)) {
     return (
       <span
-        key={item.label}
         aria-disabled="true"
         title={`${item.label} is not available yet`}
         className={`${className} cursor-not-allowed opacity-45`}
@@ -32,7 +31,6 @@ function NavigationItem({ item, variant }) {
   if (item.to) {
     return (
       <NavLink
-        key={item.label}
         to={item.to}
         end={item.end}
         className={({ isActive }) =>
@@ -53,7 +51,6 @@ function NavigationItem({ item, variant }) {
 
   return (
     <a
-      key={item.label}
       href={item.href}
       aria-current={item.active ? 'page' : undefined}
       className={`${className} ${

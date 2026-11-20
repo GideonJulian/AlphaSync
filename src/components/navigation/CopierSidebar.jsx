@@ -1,25 +1,19 @@
 import {
   ArrowLeftRight,
-  BrainCircuit,
   CandlestickChart,
   ChartNoAxesCombined,
   Grid2X2,
-  History,
   Settings,
   Store,
   UserRound,
-  Wallet,
 } from 'lucide-react'
 import DashboardNavigation from './DashboardNavigation.jsx'
 
 const navigationItems = [
   { label: 'Home', to: '/copier/dashboard', icon: Grid2X2, end: true },
   { label: 'Marketplace', to: '/copier/marketplace', icon: Store },
-  { label: 'My Strategies', href: '#strategies', icon: BrainCircuit },
   { label: 'Positions', to: '/copier/positions', icon: CandlestickChart },
-  { label: 'Trade History', disabled: true, icon: History },
   { label: 'Performance', href: '#performance', icon: ChartNoAxesCombined },
-  { label: 'Wallet', href: '/copier/dashboard#wallet', icon: Wallet },
   { label: 'Settings', href: '#risk', icon: Settings },
 ]
 

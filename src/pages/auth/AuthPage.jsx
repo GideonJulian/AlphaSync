@@ -94,14 +94,6 @@ function AuthPage() {
               {notice}
             </p>
           )}
-{/* 
-          <SocialAuth
-            notice={notice}
-            onContinue={() =>
-              setNotice('Google sign-in is not connected yet.')
-            }
-          /> */}
-
           <p className="pt-5 text-center text-sm leading-5 text-alpha-navy/70 lg:pt-6 lg:text-[13px]">
             {mode === 'register'
               ? 'Already have an account?'

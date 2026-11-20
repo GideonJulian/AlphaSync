@@ -1,4 +1,3 @@
-import { ArrowRight, UserRound } from 'lucide-react'
 import { Link } from 'react-router-dom'
 
 function AuthHeader() {
@@ -12,7 +11,6 @@ function AuthHeader() {
         >
           AlphaSync
         </Link>
-      
       </div>
     </header>
   )

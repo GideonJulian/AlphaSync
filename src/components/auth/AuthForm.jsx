@@ -4,6 +4,28 @@ import { useState } from 'react'
 const passwordMinimumLength = 6
 const passwordLengthMessage = 'Password must be at least 6 characters.'
 
+function getPasswordStrength(password) {
+  if (password.length === 0) {
+    return { level: 0, label: 'Standard Security' }
+  }
+  if (password.length < passwordMinimumLength) {
+    return { level: 1, label: 'Too Short' }
+  }
+  if (password.length < 10) {
+    return { level: 2, label: 'Moderate' }
+  }
+  if (password.length < 12) {
+    return { level: 3, label: 'Strong' }
+  }
+
+  const meetsInstitutionalCriteria =
+    /[A-Z]/.test(password) && /[0-9]/.test(password)
+
+  return meetsInstitutionalCriteria
+    ? { level: 4, label: 'Institutional Grade' }
+    : { level: 3, label: 'Strong' }
+}
+
 function AuthForm({
   mode,
   onForgotPassword,
@@ -27,29 +49,8 @@ function AuthForm({
     )
   }
 
-  const strength = password.length === 0
-    ? 0
-    : password.length < 6
-      ? 1
-      : password.length < 10
-        ? 2
-        : password.length < 12
-          ? 3
-          : /[A-Z]/.test(password) && /[0-9]/.test(password)
-            ? 4
-            : 3
-  const strengthLabel =
-    password.length === 0
-      ? 'Standard Security'
-      : password.length < 6
-        ? 'Too Short'
-        : password.length < 10
-          ? 'Moderate'
-          : password.length < 12
-            ? 'Strong'
-            : strength === 4
-              ? 'Institutional Grade'
-              : 'Strong'
+  const { level: strength, label: strengthLabel } =
+    getPasswordStrength(password)
 
   return (
     <form className="flex flex-col gap-4" onSubmit={onSubmit}>
